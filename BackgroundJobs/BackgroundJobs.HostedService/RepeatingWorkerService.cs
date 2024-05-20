@@ -10,7 +10,7 @@ namespace BackgroundJobs.HostedService
 
         public RepeatingWorkerService(ILogger<RepeatingWorkerService> Logger)
         {
-            _logger = Logger;
+            this._logger = Logger;
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)

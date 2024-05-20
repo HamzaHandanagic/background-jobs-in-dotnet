@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BackgroundJobs.WorkerServic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackgroundJobs.HostedService", "BackgroundJobs.HostedService\BackgroundJobs.HostedService.csproj", "{AA9711AF-3235-458E-8D63-DCC3EB761669}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackgroundJobs.HostedLifecycleService", "BackgroundJobs.HostedLifecycleService\BackgroundJobs.HostedLifecycleService.csproj", "{9A67BB4C-3B60-43FD-B0A8-2E36BCAE6B56}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{AA9711AF-3235-458E-8D63-DCC3EB761669}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AA9711AF-3235-458E-8D63-DCC3EB761669}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AA9711AF-3235-458E-8D63-DCC3EB761669}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A67BB4C-3B60-43FD-B0A8-2E36BCAE6B56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A67BB4C-3B60-43FD-B0A8-2E36BCAE6B56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A67BB4C-3B60-43FD-B0A8-2E36BCAE6B56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A67BB4C-3B60-43FD-B0A8-2E36BCAE6B56}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

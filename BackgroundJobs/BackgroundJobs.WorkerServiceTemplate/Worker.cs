@@ -6,7 +6,7 @@ namespace BackgroundJobs.WorkerServiceTemplate
 
         public Worker(ILogger<Worker> logger)
         {
-            _logger = logger;
+            this._logger = logger;
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
