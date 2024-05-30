@@ -6,4 +6,4 @@ At Program.cs we have Host. Host from Microsoft.Extension.Hosting package is hel
 
 The service must be registered within dependency injection container in Program.cs. We use extension method named AddHostedService on IServiceCollection. This generic method accepts the type that represents the worker service. This will add IHostedService registration for a given type. It will add it as a Singleton.
 
-If there is a need for horizontal scaling then extracting background logic to separate project is good idea.
+If there is a need for horizontal scaling then extracting background logic to separate project is good idea. Also, if our background job doesn't have too much dependecies on other services.
