@@ -1,0 +1,6 @@
+@BackgroundJobs.Quartz_HostAddress = http://localhost:5105
+
+GET {{BackgroundJobs.Quartz_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
