@@ -1,3 +1,5 @@
+using BackgroundJobs.Coravel.Invocables;
+using Coravel.Scheduling.Schedule.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BackgroundJobs.Coravel.Controllers
@@ -19,15 +21,19 @@ namespace BackgroundJobs.Coravel.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
+        public IEnumerable<WeatherForecast> Get(IScheduler scheduler)
         {
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            var weatherData = Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                TemperatureC = Random.Shared.Next(-20, 55),
+                TemperatureC = Random.Shared.Next(-20, 35),
                 Summary = Summaries[Random.Shared.Next(Summaries.Length)]
             })
-            .ToArray();
+          .ToArray();
+
+            scheduler.ScheduleWithParams<WeatherForecastJob>($"{weatherData.First().Date}: {weatherData.First().Summary}").EveryFiveSeconds();
+
+            return weatherData;
         }
     }
 }
