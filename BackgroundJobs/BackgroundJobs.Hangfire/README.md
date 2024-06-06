@@ -13,13 +13,15 @@ It accommodates fire-and-forget jobs as well as "cron"-based scheduling. Additio
 
 Hangfire in free version offers:
 
-- Fire-and-Forget Jobs - Fire-and-forget jobs are executed only once and almost immediately after creation.
+- Fire-and-Forget Jobs - Fire-and-forget jobs are executed only once and almost immediately after creation. *Example*: email notifications, reports ...
 
-- Delayed jobs - Delayed jobs are executed only once too, but not immediately, after a certain time interval.
+- Delayed jobs - Delayed jobs are executed only once too, but not immediately, after a certain time interval. *Example*: reminder notifications, health check ...
 
-- Recurring Jobs - Recurring jobs fire many times on the specified CRON schedule.
+- Recurring Jobs - Recurring jobs fire many times on the specified CRON schedule. *Example*: Cache Refresh
 
-- Continuations jobs - are executed when its parent job has been finished.
+- Continuations jobs - are executed when its parent job has been finished. *Example*: Some action will trigger fetching data from an external API, processing the fetched data and saving it to db.
+
+There are also other options like:
 
 In Pro version there are:
 - Batches - Batch is a group of background jobs that is created atomically and considered as a single entity.
@@ -53,10 +55,14 @@ BackgroundJob.Enqueue(() => Console.WriteLine("Hello!"));
 
 **Benefits:**
 
-- Popular library.
-- Built-in dashboard. Auhorization can be added.
-- Complex scheduling needs and use cases. 
+- Popular library
+- Built-in dashboard. Auhorization can be added
+- Complex scheduling needs and use cases E.g.: cron expressions
+- Task persistence
+- Additional functionalities: priority queues, parallel execution, automatic retries, job filtering and searching, custom job filters etc.
+- You can configure for performance: number of worker threads, maximum number of retries, polling interval.
+
 
 **Cons:**
-- You need database: e.g.: MySQL or PostgreSQL.
-- 
+- You need database: e.g.: MySQL or PostgreSQL. Additional Infrastructure.
+- Does not natively support async/await in .NET Core

@@ -1,34 +1,39 @@
 using BackgroundJobs.Hangfire.Jobs;
 using Hangfire;
 
-var builder = WebApplication.CreateBuilder(args);
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+        // Add services to the container.
 
-builder.Services.AddControllers();
+        builder.Services.AddControllers();
 
+        // Configure the HTTP request pipeline.
+        var connectionString = builder.Configuration.GetConnectionString("HangfireConnection");
 
-// Configure the HTTP request pipeline.
-var connectionString = builder.Configuration.GetConnectionString("HangfireConnection");
+        // Add and configure Hangfire services
+        builder.Services.AddHangfire(configuration =>
+            configuration.SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
+                         .UseSimpleAssemblyNameTypeSerializer()
+                         .UseRecommendedSerializerSettings()
+                         .UseSqlServerStorage(connectionString));
 
-// Add and configure Hangfire services
-builder.Services.AddHangfire(configuration =>
-    configuration.SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
-                 .UseSimpleAssemblyNameTypeSerializer()
-                 .UseRecommendedSerializerSettings()
-                 .UseSqlServerStorage(connectionString));
+        builder.Services.AddHangfireServer();
 
-builder.Services.AddHangfireServer();
+        var app = builder.Build();
 
-var app = builder.Build();
+        app.UseHangfireDashboard();
 
-app.UseHangfireDashboard();
+        // Extract reccuring jobs to separate static class
+        app.ScheduleJobs();
 
-// Extract reccuring jobs to separate static class
-app.StartRecurringJobs();
+        app.UseAuthorization();
 
-app.UseAuthorization();
+        app.MapControllers();
 
-app.MapControllers();
-
-app.Run();
+        app.Run();
+    }
+}
