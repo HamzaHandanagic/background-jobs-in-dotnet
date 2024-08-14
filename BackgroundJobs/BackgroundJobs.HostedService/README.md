@@ -38,7 +38,7 @@ In this case RepeatingWorkerService is going to run each 2 seconds and do some r
 
 .NET 6 introduced new .NET Timer called **PeriodicTimer** which should be used in these cases of repeatable cases. This timer will still have a few milliseconds difference from a round second, but in each repeat PeriodicTimer will try to compensate for the difference in time.  Also, with PeriodicTimer we can cancel a timer before it completes its intended executions, i.e., when conditions change and we need to halt the operation. 
 
-*NOTE*: This timer is intended to be used only by a single consumer at a time: only one call to WaitForNextTickAsync(CancellationToken) may be in flight at any given moment
+*NOTE*: This timer is intended to be used only by a single consumer at a time: only one call to WaitForNextTickAsync(CancellationToken) may be in flight at any given moment. Use Separate PeriodicTimer Instances.
 
 
 
