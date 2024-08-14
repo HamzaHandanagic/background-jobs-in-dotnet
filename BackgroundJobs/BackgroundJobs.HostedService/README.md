@@ -16,7 +16,7 @@ Because of StartAsync method, in .NET Core 3.0 BackgroundService was added as a 
 
 #### Worker class
 
-Issue is that the whole process must finish before application can continue.  StartAsync never returns and taht is an issue. Awaiting process must finish before we move on into running the application.
+Issue is that the whole process must finish before application can continue.  StartAsync never returns and that is an issue. Awaiting process must finish before we move on into running the application.
 
 One workaround was with Task.Run (kind of a fire and forget) but that is also not great practice because we don't have any idea about exception, has task finished etc. Task is scheduled on the thread pool.
 
