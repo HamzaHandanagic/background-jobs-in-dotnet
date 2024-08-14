@@ -10,9 +10,9 @@ IHostedService interface offers two methods for handling background tasks:
 
 Because of StartAsync method, in .NET Core 3.0 BackgroundService was added as a helper class. BackgroundService is encapsulating all necessary steps within its single ExecuteAsync method. This eliminates the need for you to define StartAsync, StopAsync, and other parameters.
 
-*IHostedService* – typically used for short-running tasks
+*IHostedService* â€“ typically used for short-running tasks
 
-*BackgroundService* – typically used for long-running tasks
+*BackgroundService* â€“ typically used for long-running tasks
 
 #### Worker class
 
@@ -37,6 +37,8 @@ Don't use it in situations where your hosted services depend directly on one ano
 In this case RepeatingWorkerService is going to run each 2 seconds and do some repeatable work. Task.Delay approach here is not optimal. There are  timers in .NET like System.Threading.Timer which can be used for this. This timer works by executing a single callback on a thread pool at regular intervals. These timers are tricky: they are using callbacks, they can cause memory leaks and there is a small loss of a few miliseconds. Accuracy is an issue.
 
 .NET 6 introduced new .NET Timer called **PeriodicTimer** which should be used in these cases of repeatable cases. This timer will still have a few milliseconds difference from a round second, but in each repeat PeriodicTimer will try to compensate for the difference in time.  Also, with PeriodicTimer we can cancel a timer before it completes its intended executions, i.e., when conditions change and we need to halt the operation. 
+
+*NOTE*: This timer is intended to be used only by a single consumer at a time: only one call to WaitForNextTickAsync(CancellationToken) may be in flight at any given moment
 
 
 
